@@ -13,7 +13,8 @@ class AdminHome extends BaseController
         if (session()->get('logged_in_admin')) {
             return redirect()->to('admin/dashboard');
         }
-        return view('admin/index');
+
+        return view('admin/index'); // Your login view
     }
 
     public function auth(): RedirectResponse
@@ -32,16 +33,25 @@ class AdminHome extends BaseController
                 'admin_id' => $user['admin_id'],
                 'logged_in_admin' => true,
             ]);
-            return redirect()->to('admin/dashboard'); // Change to your desired path
+            return redirect()->to('admin/dashboard');
         }
 
         $session->setFlashdata('error', 'Invalid username or password');
         return redirect()->back();
     }
 
+    public function dashboard()
+    {
+        if (!session()->get('logged_in_admin')) {
+            return redirect()->to('admin');
+        }
+
+        return view('admin/dashboard');
+    }
+
     public function logout(): RedirectResponse
     {
         session()->destroy();
-        return redirect()->to('admin/index');
+        return redirect()->to('admin');
     }
 }

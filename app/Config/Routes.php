@@ -15,3 +15,5 @@ $routes->get('/servicedetail', 'Service::servicedetail');
 $routes->get('admin', 'Admin\AdminHome::index');
 $routes->post('admin/login/auth', 'Admin\AdminHome::auth');
 $routes->get('admin/logout', 'Admin\AdminHome::logout');
+$routes->get('admin/dashboard', 'Admin\AdminHome::dashboard');
+
