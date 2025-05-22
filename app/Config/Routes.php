@@ -16,4 +16,20 @@ $routes->get('admin', 'Admin\AdminHome::index');
 $routes->post('admin/login/auth', 'Admin\AdminHome::auth');
 $routes->get('admin/logout', 'Admin\AdminHome::logout');
 $routes->get('admin/dashboard', 'Admin\AdminHome::dashboard');
+$routes->get('admin/edit-user/(:num)', 'Admin\AdminHome::edit_user/$1');
+$routes->get('admin/delete-user/(:num)', 'Admin\AdminHome::delete_user/$1');
+$routes->get('admin/create-tab', 'Admin\AdminHome::create_tab');
+
+//services routes
+$routes->get('admin/services/edit-services/(:num)', 'Admin\Service::edit_services/$1');
+$routes->get('admin/services/edit-tab-services/(:num)', 'Admin\Service::edit_tab_services/$1');
+$routes->get('admin/services/delete-service/(:num)', 'Admin\Service::delete_service/$1');
+$routes->get('admin/services/edit-service-list/(:num)', 'Admin\Service::edit_service_list/$1');
+$routes->post('admin/services/save_service_detailed', 'Admin\Service::save_service_detailed');
+
+//create-tab
+$routes->post('admin/save-tab', 'Admin\AdminHome::save_tab');
+$routes->post('admin/edit-tab', 'Admin\AdminHome::edit_tab');
+$routes->get('admin/delete-tab/(:num)', 'Admin\AdminHome::delete_tab/$1');
+
 

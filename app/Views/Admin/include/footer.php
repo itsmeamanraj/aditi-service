@@ -12,8 +12,8 @@
 
 <!-- PHP Function Call for Base URL -->
 <script src="<?= base_url('assets/admin/js/lib/jquery-3.7.1.min.js') ?>"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="<?= base_url('assets/admin/js/lib/bootstrap.bundle.min.js') ?>"></script>
-<script src="<?= base_url('assets/admin/js/lib/apexcharts.min.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/lib/dataTables.min.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/lib/iconify-icon.min.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/lib/jquery-ui.min.js') ?>"></script>
@@ -25,7 +25,56 @@
 <script src="<?= base_url('assets/admin/js/lib/file-upload.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/lib/audioplayer.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/app.js') ?>"></script>
-<script src="<?= base_url('assets/admin/js/homeOneChart.js') ?>"></script>
+  <!-- Summernote CSS -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+<!-- Summernote JS -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+<script>
+  let table = new DataTable('#dataTable');
+</script>
+<script>
+$(document).ready(function () {
+  $('.summernote').summernote({
+    height: 250,
 
+    // 🔥 Don't touch existing toolbar — just extend it
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['fontname', ['fontname']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video', 'attachFile']], // 👈 added here
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ],
+
+    buttons: {
+      attachFile: function () {
+        return $.summernote.ui.button({
+          contents: 'PDF',
+          tooltip: 'Attach File',
+          click: function () {
+            $('#fileInput').trigger('click');
+          }
+        }).render();
+      }
+    }
+  });
+
+  // Handle file selection
+  $('#fileInput').on('change', function () {
+    const file = this.files[0];
+    if (file) {
+      const fileURL = URL.createObjectURL(file); // 🔗 Temporary blob URL
+      const fileName = file.name;
+
+      const linkHtml = `<a href="${fileURL}" download="${fileName}" target="_blank">${fileName}</a>`;
+      $('.summernote').summernote('pasteHTML', linkHtml);
+    }
+  });
+});
+
+</script>
 </body>
 </html>

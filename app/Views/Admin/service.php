@@ -8,7 +8,7 @@
             <li class="fw-medium">
                 <a href="index.html" class="d-flex align-items-center gap-1 hover-text-primary">
                     <iconify-icon icon="solar:home-smile-angle-outline" class="icon text-lg"></iconify-icon>
-                    User Listing
+                    Service Listing
                 </a>
             </li>
             <li>-</li>
@@ -22,10 +22,10 @@
                 <thead>
                     <tr>
                         <th scope="col">1</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">status</th>
+                        <th scope="col">Service Name</th>
+                        <th scope="col">Project ID</th>
+                        <th scope="col">Website URL</th>
+                        <th scope="col">Whatsapp Number</th>
                         <th scope="col">Date</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -33,25 +33,25 @@
                 <tbody>
                     <?php
                         $i = 1;
-                        foreach ($users as $user) {
+                        foreach ($service as $services) {
                     ?>
                     <tr>
                         <td><?= $i++; ?></td>
-                        <td><?= $user['name'] ?></td>
-                        <td><?= $user['email'] ?></td>
-                        <td><?= $user['mobile'] ?></td>
-                        <td><span  class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm"><?= $user['user_status'] ?></span></td>
-                        <td> <?= $user['created_at'] ?> </td>
+                        <td><?= $services['service_name'] ?></td>
+                        <td><?= $services['project_id'] ?></td>
+                        <td><?= $services['website_url'] ?></td>
+                        <td> <?= $services['whatsapp_number'] ?> </td>
+                        <td> <?= $services['created_at'] ?> </td>
                         <td>
-                            <a href="<?= base_url('admin/services/edit-services/' . $user['user_id']) ?>"
+                            <a href="<?= base_url('admin/services/edit-tab-services/' . $services['service_id']) ?>"
                                 class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                                 <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                             </a>
-                            <a href="<?= base_url('admin/edit-user/' . $user['user_id']) ?>"
+                            <a href="<?= base_url('admin/services/edit-service-list' . $services['service_id']) ?>"
                                 class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
                                 <iconify-icon icon="lucide:edit"></iconify-icon>
                             </a>
-                            <a href="<?= base_url('admin/delete-user/' . $user['user_id']) ?>"
+                            <a href="<?= base_url('admin/services/delete-service/' . $services['service_id']) ?>"
                                 class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
                                 <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
                             </a>

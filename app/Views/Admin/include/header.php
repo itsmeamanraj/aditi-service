@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/remixicon.css') ?>">
     <!-- BootStrap css -->
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/lib/bootstrap.min.css') ?>">
-    <!-- Apex Chart css -->
-    <link rel="stylesheet" href="<?= base_url('assets/admin/css/lib/apexcharts.css') ?>">
     <!-- Data Table css -->
     <link rel="stylesheet" href="<?= base_url('assets/admin/css/lib/dataTables.min.css') ?>">
     <!-- Text Editor css -->
@@ -59,9 +57,15 @@
             <ul class="sidebar-menu" id="sidebar-menu">
                 <li class="sidebar-menu-group-title">Application</li>
                 <li>
-                    <a href="email.html">
+                    <a href="<?= base_url('admin/dashboard') ?>">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
                         <span>User Listing</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= base_url('admin/create-tab') ?>">
+                        <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
+                        <span>Create Tab</span>
                     </a>
                 </li>
             </ul>
