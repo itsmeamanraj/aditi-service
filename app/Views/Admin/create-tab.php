@@ -30,8 +30,8 @@
                             <div class="col-12">
                                 <label class="form-label">Tab Name</label>
                                 <input type="text" name="tab_name" class="form-control" placeholder="Enter tab name" required>
-                                <button type="submit" class="btn btn-success-600 radius-8 px-14 py-6 text-sm">Create tab</button>
                             </div>
+                            <button type="submit" class="btn btn-success-600 radius-8 px-14 py-6 text-sm">Create tab</button>
                         </div>
                     </div>
                 </form>

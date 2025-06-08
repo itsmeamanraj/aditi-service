@@ -123,5 +123,93 @@ class AdminHome extends BaseController
         }
     }
 
+    public function create_user(){
+        if (!session()->get('logged_in_admin')) {
+            return redirect()->to('admin');
+        }
+        return view('admin/create_user');
+    }
+
+    public function save_user()
+    {
+        $userModel = new UsersModel();
+
+        // Get input data
+        $name = $this->request->getPost('name');
+        $username = $this->request->getPost('username');
+        $email = $this->request->getPost('email');
+        $mobile = $this->request->getPost('mobile');
+        $password = $this->request->getPost('password');
+
+
+        // Validate required fields
+        if (!empty($username) && !empty($email) && !empty($password) && !empty($mobile) && !empty($name)) {
+
+            $data = [
+                'name' => $name,
+                'username' => $username,
+                'email' => $email,
+                'mobile' => $mobile,
+                'user_status' => '1',
+                'password' => password_hash($password, PASSWORD_DEFAULT) // Always hash passwords!
+            ];
+
+            if ($userModel->insert($data)) {
+                return redirect()->back()->with('message', 'User saved successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Failed to save user.');
+            }
+        } else {
+            return redirect()->back()->with('message', 'All fields are required.');
+        }
+    }
+
+    public function edit_user()
+    {
+        $userModel = new UsersModel();
+
+        // Get input data
+        $user_id = $this->request->getPost('id');
+        $name = $this->request->getPost('name');
+        $username = $this->request->getPost('username');
+        $email = $this->request->getPost('email');
+        $mobile = $this->request->getPost('mobile');
+
+        // Check if user exists
+        if ($userModel->find($user_id)) {
+            $data = [
+                'name'     => $name,
+                'username' => $username,
+                'email'    => $email,
+                'mobile'   => $mobile
+            ];
+
+            if ($userModel->update($user_id, $data)) {
+                return redirect()->back()->with('message', 'User updated successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Failed to update user.');
+            }
+        } else {
+            return redirect()->back()->with('message', 'User not found.');
+        }
+    }
+
+    public function delete_user($id)
+    {
+        $userModel = new UsersModel();
+
+        if ($userModel->find($id)) {
+            if ($userModel->delete($id)) {
+                return redirect()->back()->with('message', 'User deleted successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Failed to delete User.');
+            }
+        } else {
+            return redirect()->back()->with('message', 'User not found.');
+        }
+    }
+
+
+
 
 }

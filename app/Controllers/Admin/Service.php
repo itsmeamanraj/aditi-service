@@ -24,12 +24,13 @@ class Service extends BaseController
     public function edit_services($id){
         $ServiceModel = new ServiceModel();
         $ServiceModel = $ServiceModel->where('user_id', $id)->findAll();
-        return view('admin/service', ['service' => $ServiceModel]);
+        return view('admin/service', ['service' => $ServiceModel, 'user_id' => $id]);
     }
 
     public function edit_tab_services($service_id){
         $ServiceModel = new ServiceModel();
         $servicetab = new servicetab();
+        $model = new ServiceTabDataModel();
         $ServiceModel = $ServiceModel->gettabservice($service_id);
         $servicetab = $servicetab->findAll();
         return view('admin/view-service', ['service' => $ServiceModel, 'service_tab' => $servicetab]);
@@ -67,6 +68,85 @@ class Service extends BaseController
             return redirect()->back()->with('success', 'Tabs saved successfully!');
         }
     }
+
+    public function save_service()
+    {
+        $serviceModel = new ServiceModel();
+
+        // Get input data from form
+        $user_id     = $this->request->getPost('user_id');
+        $serviceName = $this->request->getPost('servicename');
+        $projectId   = $this->request->getPost('projectid');
+        $url         = $this->request->getPost('url');
+        $mobile      = $this->request->getPost('mobile');
+
+        // Validate required fields
+        if (!empty($serviceName) && !empty($projectId) && !empty($url) && !empty($mobile) && !empty($user_id) ) {
+            $data = [
+                'user_id'       => $user_id,
+                'service_name'  => $serviceName,
+                'project_id'    => $projectId,
+                'website_url'           => $url,
+                'whatsapp_number'      => $mobile
+            ];
+
+            if ($serviceModel->insert($data)) {
+                return redirect()->back()->with('message', 'Service saved successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Failed to save service.');
+            }
+        } else {
+            return redirect()->back()->with('message', 'All fields are required.');
+        }
+    }
+
+    public function edit_service_list()
+    {
+        $serviceModel = new ServiceModel();
+
+        // Get input data from form
+        $user_id     = $this->request->getPost('user_id');
+        $serviceName = $this->request->getPost('servicename');
+        $projectId   = $this->request->getPost('projectid');
+        $url         = $this->request->getPost('url');
+        $mobile      = $this->request->getPost('mobile');
+        $service_id  = $this->request->getPost('service_id');
+
+        // Validate required fields
+        if (!empty($service_id) && !empty($serviceName) && !empty($projectId) && !empty($url) && !empty($mobile) && !empty($user_id)) {
+            $data = [
+                'user_id'         => $user_id,
+                'service_name'    => $serviceName,
+                'project_id'      => $projectId,
+                'website_url'     => $url,
+                'whatsapp_number' => $mobile
+            ];
+
+            if ($serviceModel->update($service_id, $data)) {
+                return redirect()->back()->with('message', 'Service updated successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Failed to update service.');
+            }
+        } else {
+            return redirect()->back()->with('message', 'All fields are required.');
+        }
+    }
+
+    public function delete_service($id)
+    {
+        $serviceModel = new ServiceModel();
+
+        if ($serviceModel->find($id)) {
+            if ($serviceModel->delete($id)) {
+                return redirect()->back()->with('message', 'Service deleted successfully.');
+            } else {
+                return redirect()->back()->with('message', 'Failed to delete Service.');
+            }
+        } else {
+            return redirect()->back()->with('message', 'Service not found.');
+        }
+    }
+
 
 }
 ?>
