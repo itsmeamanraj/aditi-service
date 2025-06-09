@@ -29,6 +29,7 @@ class Home extends BaseController
         if ($user && password_verify($password, $user['password'])) {
             $session->set([
                 'username' => $user['username'],
+                'name' => $user['name'],
                 'user_id' => $user['user_id'],
                 'logged_in' => true,
             ]);

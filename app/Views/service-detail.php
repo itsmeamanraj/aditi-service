@@ -1,69 +1,60 @@
 <?= $this->include('include/header') ?>
 <!-- Main Login Content -->
+
+<?php
+// print_r($getTabServicecontet);
+// die;
+?>
 <div class="container mt-4">
     <div class="project-card">
         <div class="row">
             <div class="col-md-6">
                 <div class="project-title">Project</div>
-                <div class="project-id">#12345</div>
+                <div class="project-id"><?= $service_detail['project_id'] ?></div>
             </div>
             <div class="col-md-6 text-md-end client-info">
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Website:</strong> example.com</p>
-                <p><strong>Service:</strong> Web Development</p>
+                <p><strong>Name : </strong><?= session()->get('name') ?></p>
+                <p><strong>Website : </strong><?= $service_detail['website_url'] ?></p>
+                <p><strong>Service : </strong><?= $service_detail['service_name'] ?></p>
             </div>
         </div>
 
-        <ul class="nav nav-tabs mt-4 tabs-container" id="projectTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="client-tab" data-bs-toggle="tab" data-bs-target="#client"
-                    type="button" role="tab">
-                    About Client
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="website-tab" data-bs-toggle="tab" data-bs-target="#website" type="button"
-                    role="tab">
-                    About Website
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button"
-                    role="tab">
-                    Payment Status
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="access-tab" data-bs-toggle="tab" data-bs-target="#access" type="button"
-                    role="tab">
-                    Access We Have
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button"
-                    role="tab">
-                    Files
-                </button>
-            </li>
-        </ul>
+        <?php if (!empty($getTabServicecontet)) : ?>
+            <ul class="nav nav-tabs mt-4 tabs-container" id="projectTabs" role="tablist">
+                <?php foreach ($getTabServicecontet as $index => $tab) : ?>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link <?= $index === 0 ? 'active' : '' ?>"
+                                id="tab-<?= $tab->tab_id ?>-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#tab-<?= $tab->tab_id ?>"
+                                type="button"
+                                role="tab"
+                                aria-controls="tab-<?= $tab->tab_id ?>"
+                                aria-selected="<?= $index === 0 ? 'true' : 'false' ?>">
+                            <?= esc($tab->tab_name) ?>
+                        </button>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
 
-        <div class="tab-content" id="projectTabsContent">
-            <div class="tab-pane fade show active" id="client" role="tabpanel">
-                Client info content goes here.
+            <div class="tab-content mt-3" id="projectTabsContent">
+                <?php foreach ($getTabServicecontet as $index => $tab) : ?>
+                    <?php
+                    // Allow only <img> and <a> tags; strip others
+                    $allowedHtml = strip_tags($tab->user_input, '<img><a>');
+                    ?>
+                    <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>"
+                        id="tab-<?= $tab->tab_id ?>"
+                        role="tabpanel"
+                        aria-labelledby="tab-<?= $tab->tab_id ?>-tab">
+                        <?= $allowedHtml ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="tab-pane fade" id="website" role="tabpanel">
-                Website details go here.
-            </div>
-            <div class="tab-pane fade" id="payment" role="tabpanel">
-                Payment status content here.
-            </div>
-            <div class="tab-pane fade" id="access" role="tabpanel">
-                Access info goes here.
-            </div>
-            <div class="tab-pane fade" id="files" role="tabpanel">
-                File links or uploads go here.
-            </div>
-        </div>
+        <?php else : ?>
+            <p class="mt-3 text-muted">No tab content available for this project.</p>
+        <?php endif; ?>
+
     </div>
 </div>
 

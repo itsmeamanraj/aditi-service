@@ -9,7 +9,7 @@ $routes->get('/', 'Home::index');
 $routes->post('/login/auth', 'Home::auth');
 $routes->get('/logout', 'Home::logout');
 $routes->get('/service-list', 'Service::index');
-$routes->get('/servicedetail', 'Service::servicedetail');
+$routes->get('/servicedetail/(:num)', 'Service::servicedetail/$1');
 
 //admin routes
 $routes->get('admin', 'Admin\AdminHome::index');

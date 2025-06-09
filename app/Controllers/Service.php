@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsersModel;
+use App\Models\ServiceModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class Service extends BaseController
@@ -18,12 +19,19 @@ class Service extends BaseController
     }
 
     public function index(){
-        return view('service-list');
+        $serviceModel = new ServiceModel();
+        $user_id = session()->get('user_id');
+        $services = $serviceModel->where('user_id', $user_id)->findAll();
+        return view('service-list', ['service' => $services]);
     }
 
-    public function servicedetail()
+    public function servicedetail($service_id)
     {
-        return view('service-detail');
+        $ServiceModel = new ServiceModel();
+        $ServiceModel1 = $ServiceModel->gettabservice($service_id);
+        $getTabServicecontet = $ServiceModel->getTabServicecontet($service_id);
+        
+        return view('service-detail', ['service_detail'=> $ServiceModel1, 'getTabServicecontet'=> $getTabServicecontet]);
     }
 
 
