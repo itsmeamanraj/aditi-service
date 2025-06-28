@@ -130,7 +130,7 @@ class AdminHome extends BaseController
         if (!session()->get('logged_in_admin')) {
             return redirect()->to('admin');
         }
-        return view('admin/create_user');
+        return view('Admin/create_user');
     }
 
     public function save_user()

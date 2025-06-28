@@ -15,16 +15,16 @@ class Service extends BaseController
     public function __construct()
     {
         if (session()->get('logged_in_admin')) {
-            return redirect()->to('admin/dashboard');
+            return redirect()->to('Admin/dashboard');
         }
 
-        return view('admin/index');
+        return view('Admin/index');
     }
 
     public function edit_services($id){
         $ServiceModel = new ServiceModel();
         $ServiceModel = $ServiceModel->where('user_id', $id)->findAll();
-        return view('admin/service', ['service' => $ServiceModel, 'user_id' => $id]);
+        return view('Admin/service', ['service' => $ServiceModel, 'user_id' => $id]);
     }
 
     public function edit_tab_services($service_id,$id){
