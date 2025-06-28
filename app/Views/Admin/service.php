@@ -53,7 +53,8 @@
                         <td> <?= $services['whatsapp_number'] ?> </td>
                         <td><?=  (new DateTime($services['created_at']))->format('d M Y : g:i A'); ?> </td>
                         <td>
-                            <a href="<?= base_url('admin/services/edit-tab-services/' . $services['service_id']) ?>"
+                            <?php   $uri = service('uri')->setSilent();?>
+                            <a href="<?= base_url('admin/services/edit-tab-services/' .$services['service_id'])."/".$uri->getSegment(4);?>"
                                 class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center">
                                 <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
                             </a>

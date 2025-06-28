@@ -59,15 +59,16 @@ class AdminHome extends BaseController
         return redirect()->to('admin');
     }
 
-    public function create_tab()
+    public function create_tab($id)
     {
+        $user_id = service('uri')->getSegment(3);
         if (!session()->get('logged_in_admin')) {
             return redirect()->to('admin');
         }
 
         $servicetab = new servicetab();
         $servicetab = $servicetab->findAll();
-        return view('admin/create-tab', ['tabs' => $servicetab]);
+        return view('admin/create-tab', ['tabs' => $servicetab, 'user_id' => $user_id]);
     }
 
     public function save_tab()
@@ -75,9 +76,11 @@ class AdminHome extends BaseController
         $servicetab = new servicetab();
 
         $tab_name = $this->request->getPost('tab_name');
+        $user_id = $this->request->getPost('user_id');
+
 
         if (!empty($tab_name)) {
-            $data = ['tab_name' => $tab_name];
+            $data = ['tab_name' => $tab_name, 'user_id' => $user_id];
 
             if ($servicetab->insert($data)) {
                 return redirect()->back()->with('message', 'Tab saved successfully.');

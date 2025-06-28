@@ -30,6 +30,7 @@
                             <div class="col-12">
                                 <label class="form-label">Tab Name</label>
                                 <input type="text" name="tab_name" class="form-control" placeholder="Enter tab name" required>
+                                <input type="hidden" name="user_id" class="form-control" value= <?= $user_id?>>
                             </div>
                             <button type="submit" class="btn btn-success-600 radius-8 px-14 py-6 text-sm">Create tab</button>
                         </div>

@@ -20,14 +20,14 @@ $routes->get('admin/create-user', 'Admin\AdminHome::create_user');
 $routes->post('admin/save-user', 'Admin\AdminHome::save_user');
 $routes->get('admin/edit-user/(:num)', 'Admin\AdminHome::edit_user/$1');
 $routes->get('admin/delete-user/(:num)', 'Admin\AdminHome::delete_user/$1');
-$routes->get('admin/create-tab', 'Admin\AdminHome::create_tab');
+$routes->get('admin/create-tab(?:/(:num))?', 'Admin\AdminHome::create_tab/$1');
 $routes->post('admin/edit-user', 'Admin\AdminHome::edit_user');
 $routes->get('admin/delete-user/(:num)', 'Admin\AdminHome::delete_user/$1');
 
 
 //services routes
 $routes->get('admin/services/edit-services/(:num)', 'Admin\Service::edit_services/$1');
-$routes->get('admin/services/edit-tab-services/(:num)', 'Admin\Service::edit_tab_services/$1');
+$routes->get('admin/services/edit-tab-services/(:num)/(:num)', 'Admin\Service::edit_tab_services/$1/$2');
 $routes->get('admin/services/delete-service/(:num)', 'Admin\Service::delete_service/$1');
 $routes->post('admin/services/edit-service-list', 'Admin\Service::edit_service_list');
 $routes->post('admin/services/save_service_detailed', 'Admin\Service::save_service_detailed');

@@ -89,6 +89,9 @@
                 <div class="project-card">
                     <div class="row">
                         <div class="col-md-6">
+                            <a href="<?= base_url('admin/create-tab/') . service('uri')->setSilent()->getSegment(5);?>" class="btn btn-success-600 radius-8 px-14 py-6 text-md">
+                        <span>Create Tab</span>
+                    </a>
                             <div class="project-title">Project</div>
                             <div class="project-id"><?= $service['project_id'] ?></div>
                         </div>

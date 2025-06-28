@@ -27,12 +27,13 @@ class Service extends BaseController
         return view('admin/service', ['service' => $ServiceModel, 'user_id' => $id]);
     }
 
-    public function edit_tab_services($service_id){
+    public function edit_tab_services($service_id,$id){
         $ServiceModel = new ServiceModel();
         $servicetab = new servicetab();
         $model = new ServiceTabDataModel();
         $ServiceModel = $ServiceModel->gettabservice($service_id);
-        $servicetab = $servicetab->findAll();
+        $servicetab = $servicetab->where('user_id', $id)->findAll();
+        // $servicetab = $servicetab->findAll();
         return view('admin/view-service', ['service' => $ServiceModel, 'service_tab' => $servicetab]);
     }
 
