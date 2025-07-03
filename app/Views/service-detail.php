@@ -24,13 +24,13 @@
                 <?php foreach ($getTabServicecontet as $index => $tab) : ?>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link <?= $index === 0 ? 'active' : '' ?>"
-                                id="tab-<?= $tab->tab_id ?>-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#tab-<?= $tab->tab_id ?>"
-                                type="button"
-                                role="tab"
-                                aria-controls="tab-<?= $tab->tab_id ?>"
-                                aria-selected="<?= $index === 0 ? 'true' : 'false' ?>">
+                            id="tab-<?= $tab->tab_id ?>-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#tab-<?= $tab->tab_id ?>"
+                            type="button"
+                            role="tab"
+                            aria-controls="tab-<?= $tab->tab_id ?>"
+                            aria-selected="<?= $index === 0 ? 'true' : 'false' ?>">
                             <?= esc($tab->tab_name) ?>
                         </button>
                     </li>
@@ -41,7 +41,7 @@
                 <?php foreach ($getTabServicecontet as $index => $tab) : ?>
                     <?php
                     // Allow only <img> and <a> tags; strip others
-                    $allowedHtml = strip_tags($tab->user_input, '<img><a>');
+                    $allowedHtml = $tab->user_input;
                     ?>
                     <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>"
                         id="tab-<?= $tab->tab_id ?>"

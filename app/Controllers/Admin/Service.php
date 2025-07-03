@@ -21,23 +21,40 @@ class Service extends BaseController
         return view('Admin/index');
     }
 
-    public function edit_services($id){
+    public function edit_services($id)
+    {
         $ServiceModel = new ServiceModel();
         $ServiceModel = $ServiceModel->where('user_id', $id)->findAll();
         return view('Admin/service', ['service' => $ServiceModel, 'user_id' => $id]);
     }
 
-    public function edit_tab_services($service_id,$id){
+    public function edit_tab_services($service_id, $user_id)
+    {
         $ServiceModel = new ServiceModel();
-        $servicetab = new servicetab();
-        $model = new ServiceTabDataModel();
-        $ServiceModel = $ServiceModel->gettabservice($service_id);
-        $servicetab = $servicetab->where('user_id', $id)->findAll();
-        // $servicetab = $servicetab->findAll();
-        return view('admin/view-service', ['service' => $ServiceModel, 'service_tab' => $servicetab]);
+        $ServiceTabModel = new servicetab();
+        $TabDataModel = new ServiceTabDataModel();
+
+        $service = $ServiceModel->gettabservice($service_id);
+
+        $serviceTabs = $ServiceTabModel->where('user_id', $user_id)->findAll();
+
+        $tabContentRaw = $TabDataModel->where('service_id', $service_id)->findAll();
+
+        $tabContent = [];
+        foreach ($tabContentRaw as $item) {
+            $tabContent[$item['tab_id']] = $item['user_input'];
+        }
+
+        return view('admin/view-service', [
+            'service' => $service,
+            'service_tab' => $serviceTabs,
+            'getTabServicecontet' => $tabContent
+        ]);
     }
 
-    public function save_service_detailed(){
+
+    public function save_service_detailed()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model = new ServiceTabDataModel();
             $service_id = $this->request->getPost('service_id'); // if needed
@@ -48,8 +65,8 @@ class Service extends BaseController
                     continue;
                 }
                 $existing = $model->where('tab_id', $tab_id)
-                                ->where('service_id', $service_id)
-                                ->first();
+                    ->where('service_id', $service_id)
+                    ->first();
 
                 if ($existing) {
                     // Update existing
@@ -82,7 +99,7 @@ class Service extends BaseController
         $mobile      = $this->request->getPost('mobile');
 
         // Validate required fields
-        if (!empty($serviceName) && !empty($projectId) && !empty($url) && !empty($mobile) && !empty($user_id) ) {
+        if (!empty($serviceName) && !empty($projectId) && !empty($url) && !empty($mobile) && !empty($user_id)) {
             $data = [
                 'user_id'       => $user_id,
                 'service_name'  => $serviceName,
@@ -147,7 +164,4 @@ class Service extends BaseController
             return redirect()->back()->with('message', 'Service not found.');
         }
     }
-
-
 }
-?>
