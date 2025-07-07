@@ -26,9 +26,19 @@
 <script src="<?= base_url('assets/admin/js/lib/audioplayer.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/app.js') ?>"></script>
   <!-- Summernote CSS -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet"> -->
 <!-- Summernote JS -->
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script> -->
+
+<script src="https://cdn.tiny.cloud/1/iruq9y6itq591xv3nd2nccq5whftviq3ed7qhbfsdoaewfbi/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+    plugins: 'code table lists',
+    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+  });
+</script>
 <script>
   let table = new DataTable('#dataTable');
 </script>
