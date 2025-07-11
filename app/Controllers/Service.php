@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UsersModel;
 use App\Models\ServiceModel;
+use App\Models\servicetab;
+use App\Models\ServiceTabDataModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class Service extends BaseController
@@ -27,11 +29,23 @@ class Service extends BaseController
 
     public function servicedetail($service_id)
     {
+        $user_id = session()->get('user_id');
         $ServiceModel = new ServiceModel();
-        $ServiceModel1 = $ServiceModel->gettabservice($service_id);
-        $getTabServicecontet = $ServiceModel->getTabServicecontet($service_id);
-        
-        return view('service-detail', ['service_detail'=> $ServiceModel1, 'getTabServicecontet'=> $getTabServicecontet]);
+        $ServiceTabModel = new servicetab();
+        $TabDataModel = new ServiceTabDataModel();
+
+        $service = $ServiceModel->gettabservice($service_id);
+
+        $serviceTabs = $ServiceTabModel->where('user_id', $user_id)->findAll();
+
+        $tabContentRaw = $TabDataModel->where('service_id', $service_id)->findAll();
+
+        $tabContent = [];
+        foreach ($tabContentRaw as $item) {
+            $tabContent[$item['tab_id']] = $item['user_input'];
+        }
+
+        return view('service-detail', ['service_detail'=> $service, 'service_tab' => $serviceTabs, 'getTabServicecontet'=> $tabContent]);
     }
 
 

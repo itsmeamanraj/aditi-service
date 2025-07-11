@@ -25,64 +25,58 @@
 <script src="<?= base_url('assets/admin/js/lib/file-upload.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/lib/audioplayer.js') ?>"></script>
 <script src="<?= base_url('assets/admin/js/app.js') ?>"></script>
-  <!-- Summernote CSS -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet"> -->
-<!-- Summernote JS -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script> -->
-
-<script src="https://cdn.tiny.cloud/1/iruq9y6itq591xv3nd2nccq5whftviq3ed7qhbfsdoaewfbi/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-
-<script>
-  tinymce.init({
-    selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
-    plugins: 'code table lists',
-    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
-  });
-</script>
+<script src="<?= base_url('assets/admin/js/tinymce.min.js') ?>"></script>
 <script>
   let table = new DataTable('#dataTable');
 </script>
 <script>
 $(document).ready(function () {
-  $('.summernote').summernote({
-    height: 250,
-
-    // 🔥 Don't touch existing toolbar — just extend it
-    toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['fontname', ['fontname']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture', 'video', 'attachFile']], // 👈 added here
-      ['view', ['fullscreen', 'codeview', 'help']]
-    ],
-
-    buttons: {
-      attachFile: function () {
-        return $.summernote.ui.button({
-          contents: 'PDF',
-          tooltip: 'Attach File',
-          click: function () {
-            $('#fileInput').trigger('click');
+  tinymce.init({
+      selector: '.basic-conf',
+      height: 300,
+      plugins: [
+          'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+          'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
+          'table', 'emoticons', 'help'
+      ],
+      toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
+          'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+          'forecolor backcolor emoticons | help',
+      file_picker_types: 'image file', // allow both
+      file_picker_callback: function (callback, value, meta) {
+          const input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          
+          // PDF or Image types
+          if (meta.filetype === 'image') {
+              input.setAttribute('accept', 'image/*');
+          } else if (meta.filetype === 'file') {
+              input.setAttribute('accept', '.pdf');
           }
-        }).render();
+
+          input.onchange = function () {
+              const file = this.files[0];
+              const reader = new FileReader();
+
+              reader.onload = function () {
+                  const uri = reader.result;
+                  
+                  if (meta.filetype === 'image') {
+                      // Insert image
+                      callback(uri, { alt: file.name });
+                  } else if (meta.filetype === 'file') {
+                      // Insert link to PDF
+                      callback(uri, { text: file.name });
+                  }
+              };
+
+              reader.readAsDataURL(file); // convert to base64 (local preview only)
+          };
+
+          input.click();
       }
-    }
   });
 
-  // Handle file selection
-  $('#fileInput').on('change', function () {
-    const file = this.files[0];
-    if (file) {
-      const fileURL = URL.createObjectURL(file); // 🔗 Temporary blob URL
-      const fileName = file.name;
-
-      const linkHtml = `<a href="${fileURL}" download="${fileName}" target="_blank">${fileName}</a>`;
-      $('.summernote').summernote('pasteHTML', linkHtml);
-    }
-  });
 });
 
 </script>

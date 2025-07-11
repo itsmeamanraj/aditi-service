@@ -20,34 +20,27 @@
         </div>
 
         <?php if (!empty($getTabServicecontet)) : ?>
-            <ul class="nav nav-tabs mt-4 tabs-container" id="projectTabs" role="tablist">
-                <?php foreach ($getTabServicecontet as $index => $tab) : ?>
+            <ul class="nav nav-tabs mt-4" id="projectTabs" role="tablist">
+                <?php foreach ($service_tab as $index => $tab): ?>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link <?= $index === 0 ? 'active' : '' ?>"
-                            id="tab-<?= $tab->tab_id ?>-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#tab-<?= $tab->tab_id ?>"
-                            type="button"
-                            role="tab"
-                            aria-controls="tab-<?= $tab->tab_id ?>"
-                            aria-selected="<?= $index === 0 ? 'true' : 'false' ?>">
-                            <?= esc($tab->tab_name) ?>
+                        <button class="nav-link <?= $index === 0 ? 'active' : '' ?>" id="tab-<?= $tab['id'] ?>-tab"
+                                data-bs-toggle="tab" data-bs-target="#tab-<?= $tab['id'] ?>"
+                                type="button" role="tab">
+                            <?= esc($tab['tab_name']) ?>
                         </button>
                     </li>
                 <?php endforeach; ?>
             </ul>
 
-            <div class="tab-content mt-3" id="projectTabsContent">
-                <?php foreach ($getTabServicecontet as $index => $tab) : ?>
-                    <?php
-                    // Allow only <img> and <a> tags; strip others
-                    $allowedHtml = $tab->user_input;
-                    ?>
-                    <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>"
-                        id="tab-<?= $tab->tab_id ?>"
-                        role="tabpanel"
-                        aria-labelledby="tab-<?= $tab->tab_id ?>-tab">
-                        <?= $allowedHtml ?>
+            <div class="tab-content" id="projectTabsContent">
+                <?php foreach ($service_tab as $index => $tab): ?>
+                    <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>" id="tab-<?= $tab['id'] ?>" role="tabpanel">
+                        <div class="mb-3 mt-3">
+                            <label>Content for <strong><?= esc($tab['tab_name']) ?></strong></label>
+                            <textarea class="form-control basic-conf" id="myeditorinstance" name="user_input[<?= $tab['id'] ?>]">
+                                <?= esc($getTabServicecontet[$tab['id']] ?? '') ?>
+                            </textarea>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>

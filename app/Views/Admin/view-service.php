@@ -115,7 +115,7 @@
                                 <div class="tab-pane fade <?= $index === 0 ? 'show active' : '' ?>" id="tab-<?= $tab['id'] ?>" role="tabpanel">
                                     <div class="mb-3 mt-3">
                                         <label>Content for <strong><?= esc($tab['tab_name']) ?></strong></label>
-                                        <textarea class="form-control summernote" id="myeditorinstance" name="user_input[<?= $tab['id'] ?>]">
+                                        <textarea class="form-control basic-conf" id="myeditorinstance" name="user_input[<?= $tab['id'] ?>]">
                                             <?= esc($getTabServicecontet[$tab['id']] ?? '') ?>
                                         </textarea>
                                     </div>
