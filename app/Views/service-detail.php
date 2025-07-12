@@ -1,5 +1,18 @@
 <?= $this->include('include/header') ?>
 <!-- Main Login Content -->
+<style>
+    .tab-content table {
+        border: 1px solid #000;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .tab-content th,
+    .tab-content td {
+        border: 1px solid #000;
+        padding: 8px;
+    }
+</style>
 
 <?php
 // print_r($getTabServicecontet);
@@ -20,7 +33,7 @@
         </div>
 
         <?php if (!empty($getTabServicecontet)) : ?>
-                  <ul class="nav nav-tabs mt-4 tabs-container" id="projectTabs" role="tablist">
+            <ul class="nav nav-tabs mt-4 tabs-container" id="projectTabs" role="tablist">
                 <?php foreach ($getTabServicecontet as $index => $tab) : ?>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link <?= $index === 0 ? 'active' : '' ?>"
@@ -37,7 +50,7 @@
                 <?php endforeach; ?>
             </ul>
 
-           <div class="tab-content mt-3" id="projectTabsContent">
+            <div class="tab-content mt-3" id="projectTabsContent">
                 <?php foreach ($getTabServicecontet as $index => $tab) : ?>
                     <?php
                     // Allow only <img> and <a> tags; strip others
@@ -47,8 +60,10 @@
                         id="tab-<?= $tab->tab_id ?>"
                         role="tabpanel"
                         aria-labelledby="tab-<?= $tab->tab_id ?>-tab">
-                        <?= $allowedHtml ?>
+
+                        <?= html_entity_decode($tab->user_input) ?>
                     </div>
+
                 <?php endforeach; ?>
             </div>
         <?php else : ?>
