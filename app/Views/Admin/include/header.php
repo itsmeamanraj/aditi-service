@@ -68,12 +68,12 @@
                         <span>Create User </span>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="<?= base_url('admin/create-tab') ?>">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
                         <span>Create Tab</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </aside>

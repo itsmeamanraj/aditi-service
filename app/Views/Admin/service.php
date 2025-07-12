@@ -90,8 +90,8 @@
                                             <input type="text" name="projectid" class="form-control" value="<?= $services['project_id'] ?>" placeholder="Enter id" required>
                                         </div>
                                         <div class="col-12">
-                                            <label class="form-label">Website Url</label>
-                                            <input type="url" name="url" class="form-control" value="<?= $services['website_url'] ?>"  placeholder="Enter url" required>
+                                            <label class="form-label">Url</label>
+                                            <input type="url" name="url" class="form-control" value="<?= $services['website_url'] ?>"  placeholder="Enter url">
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Whatsapp Number</label>
@@ -134,8 +134,8 @@
                         <input type="text" name="projectid" class="form-control" placeholder="Enter id" required>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Website Url</label>
-                        <input type="url" name="url" class="form-control"  placeholder="Enter url" required>
+                        <label class="form-label">Url</label>
+                        <input type="url" name="url" class="form-control"  placeholder="Enter url">
                     </div>
                     <div class="col-12">
                         <label class="form-label">Whatsapp Number</label>

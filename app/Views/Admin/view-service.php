@@ -55,6 +55,9 @@
   border-top: none;
   border-radius: 0 0 8px 8px;
 }
+.tox-notifications-container{
+    display:none;
+}
 </style>
 
 <div class="dashboard-main-body">
