@@ -30,55 +30,99 @@
   let table = new DataTable('#dataTable');
 </script>
 <script>
-$(document).ready(function () {
-  tinymce.init({
+  $(document).ready(function() {
+    tinymce.init({
       selector: '.basic-conf',
       height: 300,
       plugins: [
-          'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-          'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
-          'table', 'emoticons', 'help'
+        'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+        'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
+        'table', 'emoticons', 'help'
       ],
       toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | ' +
-          'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
-          'forecolor backcolor emoticons | help',
-      file_picker_types: 'image file', // allow both
-      file_picker_callback: function (callback, value, meta) {
-          const input = document.createElement('input');
-          input.setAttribute('type', 'file');
-          
-          // PDF or Image types
-          if (meta.filetype === 'image') {
-              input.setAttribute('accept', 'image/*');
-          } else if (meta.filetype === 'file') {
-              input.setAttribute('accept', '.pdf');
+        'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+        'forecolor backcolor emoticons | help',
+      automatic_uploads: true,
+      convert_urls: true,
+      images_upload_url: '<?= base_url('admin/services/upload_file') ?>',
+      images_reuse_filename: true,
+
+      images_upload_handler: async function(blobInfo, success, failure) {
+        try {
+          const formData = new FormData();
+          formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+          const response = await fetch('<?= base_url('admin/services/upload_file') ?>', {
+            method: 'POST',
+            body: formData
+          });
+
+          const data = await response.json();
+
+          if (data.location) {
+            success(data.location); // Valid image URL
+          } else {
+            failure(data.error || 'Upload failed.');
           }
+        } catch (err) {
+          console.error(err);
+          failure('Unexpected error uploading file.');
+        }
+      },
 
-          input.onchange = function () {
-              const file = this.files[0];
-              const reader = new FileReader();
+      file_picker_types: 'image file', // Must support both
+      file_picker_callback: function(callback, value, meta) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
 
-              reader.onload = function () {
-                  const uri = reader.result;
-                  
-                  if (meta.filetype === 'image') {
-                      // Insert image
-                      callback(uri, { alt: file.name });
-                  } else if (meta.filetype === 'file') {
-                      // Insert link to PDF
-                      callback(uri, { text: file.name });
-                  }
-              };
+        if (meta.filetype === 'image') {
+          input.setAttribute('accept', 'image/*');
+        } else if (meta.filetype === 'file') {
+          input.setAttribute('accept', '.pdf');
+        }
 
-              reader.readAsDataURL(file); // convert to base64 (local preview only)
-          };
+        input.onchange = async function() {
+          const file = this.files[0];
+          const formData = new FormData();
+          formData.append('file', file);
 
-          input.click();
+          try {
+            const response = await fetch('<?= base_url('admin/services/upload_file') ?>', {
+              method: 'POST',
+              body: formData
+            });
+
+            const data = await response.json();
+
+            if (!data.location) {
+              alert(data.error || 'File upload failed.');
+              return;
+            }
+
+            if (meta.filetype === 'image') {
+              // ✅ Return image URL directly
+              callback(data.location, {
+                alt: file.name
+              });
+            } else {
+              // ✅ Return link for PDFs
+              callback(data.location, {
+                text: file.name
+              });
+            }
+
+          } catch (err) {
+            console.error(err);
+            alert('Upload error: ' + err.message);
+          }
+        };
+
+        input.click();
       }
+    });
+
   });
-
-});
-
 </script>
 </body>
+
 </html>

@@ -51,6 +51,27 @@ class Service extends BaseController
             'getTabServicecontet' => $tabContent
         ]);
     }
+    public function upload_file()
+    {
+        $file = $this->request->getFile('file');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $uploadPath = FCPATH . 'public/uploads/tinymce/';
+
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            $file->move($uploadPath, $newName);
+
+            return $this->response->setJSON([
+                'location' => base_url('public/uploads/tinymce/' . $newName)  // must match exactly
+            ]);
+        }
+
+        return $this->response->setJSON(['error' => 'Upload failed.']);
+    }
 
 
     public function save_service_detailed()

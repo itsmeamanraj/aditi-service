@@ -31,6 +31,7 @@ $routes->get('admin/services/edit-tab-services/(:num)/(:num)', 'Admin\Service::e
 $routes->get('admin/services/delete-service/(:num)', 'Admin\Service::delete_service/$1');
 $routes->post('admin/services/edit-service-list', 'Admin\Service::edit_service_list');
 $routes->post('admin/services/save_service_detailed', 'Admin\Service::save_service_detailed');
+$routes->post('admin/services/upload_file', 'Admin\Service::upload_file');
 $routes->post('admin/services/save-service', 'Admin\Service::save_service');
 
 
