@@ -13,12 +13,12 @@
 
         <form action="<?= base_url('/login/auth') ?>" method="post">
             <div class="mb-3 text-start">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">Username*</label>
                 <input type="text" id="username" class="form-control" name="username" placeholder="Enter your username">
             </div>
 
             <div class="mb-3 text-start">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Password*</label>
                 <input type="password" id="password" class="form-control" name="password"
                     placeholder="Enter your password">
             </div>
