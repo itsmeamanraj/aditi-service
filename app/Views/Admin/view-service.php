@@ -58,6 +58,9 @@
 .tox-notifications-container{
     display:none;
 }
+#aria_1059207847981752508219081{
+    display:none;
+}
 </style>
 
 <div class="dashboard-main-body">

@@ -19,17 +19,40 @@ class AdminHome extends BaseController
         return view('admin/index');
     }
 
+    // public function auth(): RedirectResponse
+    // {
+    //     $session = session();
+    //     $userModel = new AdminModel();
+
+    //     $username = $this->request->getPost('username');
+    //     $password = $this->request->getPost('password');
+
+    //     $user = $userModel->where('username', $username)->first();
+
+    //     if ($user && password_verify($password, $user['password'])) {
+    //         $session->set([
+    //             'username' => $user['username'],
+    //             'admin_id' => $user['admin_id'],
+    //             'logged_in_admin' => true,
+    //         ]);
+    //         return redirect()->to('admin/dashboard');
+    //     }
+
+    //     $session->setFlashdata('error', 'Invalid username or password');
+    //     return redirect()->back();
+    // }
+    
     public function auth(): RedirectResponse
     {
         $session = session();
         $userModel = new AdminModel();
-
+    
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
-
+    
         $user = $userModel->where('username', $username)->first();
-
-        if ($user && password_verify($password, $user['password'])) {
+    
+        if ($user && $password === $user['password']) {
             $session->set([
                 'username' => $user['username'],
                 'admin_id' => $user['admin_id'],
@@ -37,10 +60,11 @@ class AdminHome extends BaseController
             ]);
             return redirect()->to('admin/dashboard');
         }
-
+    
         $session->setFlashdata('error', 'Invalid username or password');
         return redirect()->back();
     }
+
 
     public function dashboard()
     {
@@ -130,33 +154,74 @@ class AdminHome extends BaseController
         if (!session()->get('logged_in_admin')) {
             return redirect()->to('admin');
         }
-        return view('Admin/create_user');
+        return view('admin/create_user');
     }
 
+    // public function save_user()
+    // {
+    //     $userModel = new UsersModel();
+
+    //     // Get input data
+    //     $name = $this->request->getPost('name');
+    //     $username = $this->request->getPost('username');
+    //     $email = $this->request->getPost('email');
+    //     $mobile = $this->request->getPost('mobile');
+    //     $password = $this->request->getPost('password');
+
+
+    //     // Validate required fields
+    //     if (!empty($username) && !empty($email) && !empty($password) && !empty($mobile) && !empty($name)) {
+
+    //         $data = [
+    //             'name' => $name,
+    //             'username' => $username,
+    //             'email' => $email,
+    //             'mobile' => $mobile,
+    //             'user_status' => '1',
+    //             'password' => password_hash($password, PASSWORD_DEFAULT) // Always hash passwords!
+    //         ];
+
+    //         if ($userModel->insert($data)) {
+    //             return redirect()->back()->with('message', 'User saved successfully.');
+    //         } else {
+    //             return redirect()->back()->with('message', 'Failed to save user.');
+    //         }
+    //     } else {
+    //         return redirect()->back()->with('message', 'All fields are required.');
+    //     }
+    // }
+    
     public function save_user()
     {
         $userModel = new UsersModel();
-
+    
         // Get input data
         $name = $this->request->getPost('name');
         $username = $this->request->getPost('username');
         $email = $this->request->getPost('email');
         $mobile = $this->request->getPost('mobile');
         $password = $this->request->getPost('password');
-
-
+    
         // Validate required fields
         if (!empty($username) && !empty($email) && !empty($password) && !empty($mobile) && !empty($name)) {
-
+    
+            // Check if email already exists
+            $existingUser = $userModel->where('email', $email)->first();
+    
+            if ($existingUser) {
+                return redirect()->back()->with('message', 'Email already exists.');
+            }
+    
+            // Prepare user data
             $data = [
                 'name' => $name,
                 'username' => $username,
                 'email' => $email,
                 'mobile' => $mobile,
                 'user_status' => '1',
-                'password' => password_hash($password, PASSWORD_DEFAULT) // Always hash passwords!
+                'password' => $password
             ];
-
+    
             if ($userModel->insert($data)) {
                 return redirect()->back()->with('message', 'User saved successfully.');
             } else {
@@ -166,6 +231,7 @@ class AdminHome extends BaseController
             return redirect()->back()->with('message', 'All fields are required.');
         }
     }
+
 
     public function edit_user()
     {
@@ -177,6 +243,9 @@ class AdminHome extends BaseController
         $username = $this->request->getPost('username');
         $email = $this->request->getPost('email');
         $mobile = $this->request->getPost('mobile');
+        $password = $this->request->getPost('password');
+        
+        
 
         // Check if user exists
         if ($userModel->find($user_id)) {
@@ -184,7 +253,8 @@ class AdminHome extends BaseController
                 'name'     => $name,
                 'username' => $username,
                 'email'    => $email,
-                'mobile'   => $mobile
+                'mobile'   => $mobile,
+                'password' => $password
             ];
 
             if ($userModel->update($user_id, $data)) {

@@ -1,0 +1,23 @@
+CRITICAL - 2025-07-11 15:46:47 --> ErrorException: Attempt to read property "tab_id" on string
+[Method: GET, Route: servicedetail/1]
+in APPPATH\Views\service-detail.php on line 27.
+ 1 APPPATH\Views\service-detail.php(27): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "tab_id" on string', 'C:\\wamp64\\www\\aditi-service\\app\\Views\\service-detail.php', 27)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\aditi-service\\app\\Views\\service-detail.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('service-detail', [], true)
+ 5 APPPATH\Controllers\Service.php(42): view('service-detail', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Service->servicedetail('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Service))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-11 15:52:37 --> Error: Class "App\Controllers\servicetab" not found
+[Method: GET, Route: servicedetail/1]
+in APPPATH\Controllers\Service.php on line 33.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Service->servicedetail('1')
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Service))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

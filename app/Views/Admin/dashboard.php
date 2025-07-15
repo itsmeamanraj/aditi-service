@@ -45,7 +45,7 @@
                         <td><?= $user['name'] ?></td>
                         <td><?= $user['email'] ?></td>
                         <td><?= $user['mobile'] ?></td>
-                        <td><span  class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm"><?= $user['user_status'] ?></span></td>
+                        <td><span  class="bg-success-focus text-success-main px-24 py-4 rounded-pill fw-medium text-sm"><?= $user['user_status'] == 1 ? 'Active' : 'Inactive' ?></span></td>
                         <td> <?=  (new DateTime($user['created_at']))->format('d M Y : g:i A'); ?> </td>
                         <td>
                             <a href="<?= base_url('admin/services/edit-services/' . $user['user_id']) ?>"
@@ -85,6 +85,10 @@
                                         <div class="col-12">
                                             <label class="form-label">Email</label>
                                             <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>" placeholder="Enter Email" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Password</label>
+                                            <input type="text" name="password" class="form-control" value="<?= $user['password'] ?>" placeholder="Enter password" required>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Mobile</label>

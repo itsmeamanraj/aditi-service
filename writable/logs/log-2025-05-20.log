@@ -1,0 +1,188 @@
+ERROR - 2025-05-20 20:54:44 --> mysqli_sql_exception: Unknown column 'services.id' in 'where clause' in C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `service...', 0)
+#1 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `service...')
+#2 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `service...')
+#3 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `service...', Array, false)
+#4 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\BaseModel.php(717): CodeIgniter\Model->doFirst()
+#6 C:\wamp64\www\aditi-service\app\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+#7 C:\wamp64\www\aditi-service\app\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+#8 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+#9 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+#10 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\wamp64\www\aditi-service\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-05-20 20:54:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'services.id' in 'where clause'
+[Method: GET, Route: admin/services/edit-tab-services/1]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = :services.id:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(717): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-20 20:54:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'services.id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = :services.id:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(717): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-20 20:54:44 --> [Caused by] mysqli_sql_exception: Unknown column 'services.id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = :services.id:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(717): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-05-20 20:54:49 --> mysqli_sql_exception: Unknown column 'services.id' in 'where clause' in C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `service...', 0)
+#1 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `service...')
+#2 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `service...')
+#3 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `service...', Array, false)
+#4 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\BaseModel.php(717): CodeIgniter\Model->doFirst()
+#6 C:\wamp64\www\aditi-service\app\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+#7 C:\wamp64\www\aditi-service\app\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+#8 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+#9 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+#10 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\wamp64\www\aditi-service\vendor\codeigniter4\framework\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\wamp64\www\aditi-service\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+CRITICAL - 2025-05-20 20:54:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'services.id' in 'where clause'
+[Method: GET, Route: admin/services/edit-tab-services/1]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = :services.id:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(717): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+ 5 APPPATH\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-20 20:54:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'services.id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = :services.id:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(717): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+ 7 APPPATH\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-20 20:54:49 --> [Caused by] mysqli_sql_exception: Unknown column 'services.id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = \'1\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `services`.*, `users`.*
+FROM `services`
+JOIN `users` ON `users`.`user_id` = `services`.`user_id`
+WHERE `services`.`id` = :services.id:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(717): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Models\ServiceModel.php(20): CodeIgniter\BaseModel->first()
+ 8 APPPATH\Controllers\Admin\Service.php(30): App\Models\ServiceMOdel->getTabService('1')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\Service->edit_tab_services('1')
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\Service))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
