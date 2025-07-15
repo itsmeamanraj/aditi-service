@@ -1,5 +1,5 @@
 # Ignore app folder
-app/
+#app/
 
 # Optional: Ignore common system files
 .DS_Store
