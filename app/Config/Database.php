@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => 'viewyourwork',
-        'password'     => 'viewyourwork',
-        'database'     => 'viewyourwork',
+        'username'     => 'root',
+        'password'     => '',
+        'database'     => 'aditiservice',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

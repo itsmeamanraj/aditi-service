@@ -26,7 +26,7 @@ class Home extends BaseController
 
         $user = $userModel->where('username', $username)->first();
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && $password === $user['password']) {
             $session->set([
                 'username' => $user['username'],
                 'name' => $user['name'],
