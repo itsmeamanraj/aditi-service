@@ -83,8 +83,15 @@
             <div class="container mt-4">
                 <div class="project-card">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col d-flex justify-content-between">
                             <a href="<?= base_url('admin/create-tab/') . service('uri')->setSilent()->getSegment(5); ?>" class="btn btn-custom radius-8 px-14 py-6 text-md">Create Tab</a>
+                            <a href="<?php echo base_url('admin/services/edit-services/') . service('uri')->setSilent()->getSegment(5); ?>" class="btn btn-danger">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="project-title">Project</div>
                             <div class="project-id"><?= esc($service['project_id']) ?></div>
                         </div>

@@ -23,11 +23,17 @@
             </div>
         <?php endif; ?>
         <div class="card-body">
-            <div class="row col-3">
-                <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-success">
-                    Add service
-                </button>
+            <div class="row">
+                <div class="col d-flex justify-content-between">
+                    <button type="button" data-toggle="modal" data-target="#modal" class="btn btn-success">
+                        Add service
+                    </button>
+                    <a href="<?php echo base_url('admin/dashboard') ?>" class="btn btn-danger">
+                        Back
+                    </a>
+                </div>
             </div>
+
             <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                 <thead>
                     <tr>

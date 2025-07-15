@@ -1,0 +1,9 @@
+# Ignore app folder
+app/
+
+# Optional: Ignore common system files
+.DS_Store
+Thumbs.db
+
+# Optional: Ignore node modules if using Node.js
+node_modules/
