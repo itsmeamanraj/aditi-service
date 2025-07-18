@@ -57,7 +57,7 @@
                                 <iconify-icon icon="lucide:edit"></iconify-icon>
                             </button>
                             <a href="<?= base_url('admin/delete-user/' . $user['user_id']) ?>"
-                                class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                                class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center" onclick="return confirm('Are you sure you want to delete this user?');">
                                 <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
                             </a>
                         </td>

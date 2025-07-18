@@ -40,6 +40,10 @@ class Service extends BaseController
 
         $tabContentRaw = $TabDataModel->where('service_id', $service_id)->findAll();
 
+        // print_r($tabContentRaw);
+
+        // exit;
+
         $tabContent = [];
         foreach ($tabContentRaw as $item) {
             $tabContent[$item['tab_id']] = $item['user_input'];

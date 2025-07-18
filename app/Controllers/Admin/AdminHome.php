@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AdminModel;
 use App\Models\UsersModel;
 use App\Models\servicetab;
+use App\Models\ServiceTabDataModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 class AdminHome extends BaseController
@@ -96,9 +97,12 @@ class AdminHome extends BaseController
     public function delete_tab($id)
     {
         $servicetab = new servicetab();
+        $tab_id = $id;
+        $ServiceTabDataModel = new ServiceTabDataModel();
 
         if ($servicetab->find($id)) {
             if ($servicetab->delete($id)) {
+                $ServiceTabDataModel->where('tab_id', $tab_id)->delete();
                 return redirect()->back()->with('message', 'Tab deleted successfully.');
             } else {
                 return redirect()->back()->with('message', 'Failed to delete tab.');

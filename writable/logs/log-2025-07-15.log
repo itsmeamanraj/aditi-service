@@ -18,3 +18,17 @@ in SYSTEMPATH/Router/Router.php on line 741.
  5 SYSTEMPATH/Boot.php(334): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
  7 FCPATH/index.php(59): CodeIgniter\Boot::bootWeb()
+CRITICAL - 2025-07-15 20:05:15 --> ErrorException: Undefined property: CodeIgniter\View\View::$request
+[Method: GET, Route: admin/create-tab/1]
+in APPPATH\Views\admin\create-tab.php on line 22.
+ 1 APPPATH\Views\admin\create-tab.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$request', 'C:\\wamp64\\www\\aditi-service\\app\\Views\\admin\\create-tab.php', 22)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\aditi-service\\app\\Views\\admin\\create-tab.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->{closure:CodeIgniter\View\View::render():221}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('admin/create-tab', [], true)
+ 5 APPPATH\Controllers\Admin\AdminHome.php(72): view('admin/create-tab', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\AdminHome->create_tab('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\AdminHome))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

@@ -1,0 +1,18 @@
+CRITICAL - 2025-07-16 13:41:39 --> Error: Call to undefined method App\Models\ServiceTabDataModel::where()
+[Method: GET, Route: admin/delete-tab/10]
+in APPPATH\Controllers\Admin\AdminHome.php on line 104.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\AdminHome->delete_tab('10')
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\AdminHome))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 13:45:37 --> Error: Call to undefined method App\Models\ServiceTabDataModel::where()
+[Method: GET, Route: admin/delete-tab/7]
+in APPPATH\Controllers\Admin\AdminHome.php on line 105.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Admin\AdminHome->delete_tab('7')
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Admin\AdminHome))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
